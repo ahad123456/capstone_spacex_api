@@ -134,45 +134,45 @@ def main():
 
     # create dictionary for Lunch dictionary
     lunch_dict = create_global_vars()
-    #lunch_dict = {'playload':[], 'orbit':[]}
-    lunch_dict['FlightNumber'].append(list(data['flight_number']))
-    lunch_dict['Date'].append(list(data['date_utc']))
+    lunch_dict['FlightNumber'] = list(data['flight_number'])
+    lunch_dict['Date'] = list(data['date_utc'])
     
     # Get playload & orbit data 
     payload_mass, orbit = getPayloadData(data['payloads'])
-    lunch_dict['PayloadMass'].append(payload_mass)
-    lunch_dict['orbit'] = orbit
-    lunch_dict['playload'] = payload_mass
-    df = pd.DataFrame({'playload':payload_mass, 'orbit':orbit})
+    lunch_dict['PayloadMass'] = payload_mass
+    lunch_dict['Orbit'] = orbit
 
     # Get Block, ReusedCount, Serial, Outcome, Flights ..... data.  
     block, reused_count, serial, outcome, flights, grid_fins, reused, legs, landingpad = getCoreData(data['cores'])
-    lunch_dict['Block'].append(block), lunch_dict['ReusedCount'].append(reused_count), lunch_dict['Serial'].append(serial), 
-    lunch_dict['Outcome'].append(outcome), lunch_dict['Flights'].append(flights), lunch_dict['GridFins'].append(grid_fins), 
-    lunch_dict['Reused'].append(reused), lunch_dict['Legs'].append(legs), lunch_dict['LandingPad'].append(landingpad), 
+    lunch_dict['Block'] = block
+    lunch_dict['ReusedCount'] = reused_count
+    lunch_dict['Serial'] = serial 
+    lunch_dict['Outcome'] = outcome
+    lunch_dict['Flights'] = flights
+    lunch_dict['GridFins'] = grid_fins
+    lunch_dict['Reused'] = reused
+    lunch_dict['Legs'] = legs
+    lunch_dict['LandingPad'] = landingpad
 
     # Get Lunchsite data 
     longitude, latitude, lunchsite = getLaunchSite(data['launchpad'])
-    lunch_dict['Longitude'].append(longitude)
-    lunch_dict['Latitude'].append(latitude)
-    lunch_dict['LaunchSite'].append(lunchsite)
-
+    lunch_dict['Longitude'] = longitude
+    lunch_dict['Latitude'] = latitude
+    lunch_dict['LaunchSite'] = lunchsite
 
     # Get Booster ver data
     booster = getBoosterVersion(data['rocket'])
-    lunch_dict['BoosterVersion'].append(booster)
+    lunch_dict['BoosterVersion'] = booster
 
     # Convert to dataframe
     lunch_df = pd.DataFrame(lunch_dict)
     lunch_df.head()
     
     # Data Wrangling 
-    lunche_data = data_wrangle(lunch_df)
-
-    lunche_data.head() 
+    #lunche_data = data_wrangle(lunch_df)
 
     # Export data to .csv file 
-    lunche_data.to_csv('API_.csv', index= False)
+    lunch_df.to_csv('API_.csv', index= False)
         
 if __name__ == '__main__':
   main()
