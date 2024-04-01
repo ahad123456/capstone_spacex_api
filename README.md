@@ -1,2 +1,5 @@
 # capstone_spacex_api
-Repository related to call data from API and apply data wrangling 
+This repository include coding for:
+- Using API to fetch data.
+- Apply data wrangling on data got it.
+
